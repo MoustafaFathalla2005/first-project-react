@@ -1,0 +1,133 @@
+import trainingTeeImage from "../assets/images/training-tee.jpg";
+import runningShoeImage from "../assets/images/running-shoe.jpg";
+import trainingShortImage from "../assets/images/training-short.jpg";
+import shellJacketImage from "../assets/images/shell-jacket.jpg";
+import everydayCapImage from "../assets/images/everyday-cap.jpg";
+import foamRollerImage from "../assets/images/foam-roller.jpg";
+import crossbodyPackImage from "../assets/images/crossbody-pack.jpg";
+import trainingGlovesImage from "../assets/images/training-gloves.jpg";
+
+const products = [
+  {
+    id: 1,
+    title: "AeroFlex Training Tee",
+    category: "Training",
+    price: 34.99,
+    image: trainingTeeImage,
+    description: "A featherweight performance tee with breathable mesh panels for hard sessions and everyday movement.",
+    rating: { rate: 4.9, count: 128 },
+    badge: "Best seller",
+  },
+  {
+    id: 2,
+    title: "Velocity Runner X",
+    category: "Running",
+    price: 119.99,
+    image: runningShoeImage,
+    description: "Responsive cushioning and a grippy outsole built to keep your stride smooth from warm-up to finish line.",
+    rating: { rate: 4.8, count: 214 },
+    badge: "New drop",
+  },
+  {
+    id: 3,
+    title: "CoreLift Training Short",
+    category: "Training",
+    price: 42.0,
+    image: trainingShortImage,
+    description: "Four-way stretch, secure pockets and a clean athletic cut for lifting, circuits and everything between.",
+    rating: { rate: 4.7, count: 96 },
+    badge: "Studio pick",
+  },
+  {
+    id: 4,
+    title: "Altitude Shell Jacket",
+    category: "Outdoor",
+    price: 89.5,
+    image: shellJacketImage,
+    description: "Light rain protection with a packable silhouette for early starts, city commutes and mountain weather.",
+    rating: { rate: 4.6, count: 74 },
+    badge: "Weather ready",
+  },
+  {
+    id: 5,
+    title: "Sprintix Everyday Cap",
+    category: "Accessories",
+    price: 24.0,
+    image: everydayCapImage,
+    description: "A structured six-panel cap with a sweat-wicking band and adjustable fit for all-day comfort.",
+    rating: { rate: 4.5, count: 61 },
+    badge: "Everyday essential",
+  },
+  {
+    id: 6,
+    title: "Recovery Foam Roller",
+    category: "Recovery",
+    price: 31.99,
+    image: foamRollerImage,
+    description: "Dense textured foam for post-workout recovery, mobility work and a better daily reset.",
+    rating: { rate: 4.8, count: 143 },
+    badge: "Recovery hero",
+  },
+  {
+    id: 7,
+    title: "Momentum Crossbody Pack",
+    category: "Accessories",
+    price: 54.99,
+    image: crossbodyPackImage,
+    description: "Compact storage for keys, phone and essentials, finished with a quick-access front pocket.",
+    rating: { rate: 4.7, count: 88 },
+    badge: "On the move",
+  },
+  {
+    id: 8,
+    title: "PowerGrip Training Gloves",
+    category: "Training",
+    price: 27.5,
+    image: trainingGlovesImage,
+    description: "Reinforced palms and a flexible wrist closure for confident grip through every set.",
+    rating: { rate: 4.6, count: 52 },
+    badge: "Gym ready",
+  },
+  {
+    id: 9,
+    title: "FlowState Yoga Set",
+    category: "Recovery",
+    price: 64.99,
+    image: trainingShortImage,
+    description: "Soft stretch fabric and a balanced fit for mobility sessions, yoga flows and calm recovery days.",
+    rating: { rate: 4.8, count: 67 },
+    badge: "New movement",
+  },
+  {
+    id: 10,
+    title: "City Pace Windbreaker",
+    category: "Outdoor",
+    price: 76.0,
+    image: shellJacketImage,
+    description: "A lightweight layer with a clean urban shape for warm-ups, commutes and changing weather.",
+    rating: { rate: 4.7, count: 83 },
+    badge: "Lightweight",
+  },
+  {
+    id: 11,
+    title: "Daily Motion Tank",
+    category: "Training",
+    price: 29.99,
+    image: trainingTeeImage,
+    description: "An easy everyday training layer with a relaxed cut and breathable feel from first rep to last.",
+    rating: { rate: 4.6, count: 49 },
+    badge: "Daily essential",
+  },
+  {
+    id: 12,
+    title: "Stride Recovery Slides",
+    category: "Recovery",
+    price: 38.5,
+    image: runningShoeImage,
+    description: "Cushioned recovery slides for post-run comfort, locker rooms and slow Sunday mornings.",
+    rating: { rate: 4.5, count: 71 },
+    badge: "Post-workout",
+  },
+];
+
+export default products;

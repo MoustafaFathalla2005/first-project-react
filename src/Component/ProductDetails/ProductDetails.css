@@ -1,0 +1,136 @@
+.details-card {
+  display: flex;
+  gap: 40px;
+  background-color: var(--white);
+  border-radius: var(--radius);
+  padding: 36px;
+  box-shadow: var(--shadow);
+  flex-wrap: wrap;
+}
+
+.details-img {
+  flex: 0 0 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f8fa;
+  border-radius: 12px;
+}
+
+.details-img img {
+  max-height: 250px;
+  max-width: 85%;
+  object-fit: contain;
+}
+
+.details-info {
+  flex: 1;
+  min-width: 260px;
+  text-align: left;
+}
+
+.details-info .product-category {
+  display: inline-block;
+  background-color: rgba(255, 87, 34, 0.12);
+  color: var(--accent-dark);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.details-info h2 {
+  font-size: 24px;
+  margin: 0 0 10px;
+}
+
+.details-info .price {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--navy);
+  margin: 0 0 6px;
+}
+
+.details-info .rating {
+  font-size: 14px;
+  color: #444;
+  margin: 0 0 16px;
+}
+
+.details-info .rating-count {
+  color: var(--text-muted);
+}
+
+.details-info .description {
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 26px;
+}
+
+.qty-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.qty-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.qty-stepper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1.5px solid #e2e6eb;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.qty-stepper button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background-color: #f7f8fa;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.qty-stepper button:hover {
+  background-color: rgba(255, 87, 34, 0.14);
+  color: var(--accent-dark);
+}
+
+.qty-stepper span {
+  width: 40px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.details-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.back-link {
+  display: inline-block;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}

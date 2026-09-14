@@ -1,0 +1,21 @@
+.not-found {
+  min-height: 82vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.not-found h1 {
+  font-size: 110px;
+  margin: 0;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.not-found p {
+  font-size: 20px;
+  color: var(--navy);
+  margin: 4px 0 28px;
+  font-weight: 600;
+}
