@@ -143,6 +143,11 @@ a.product-img {
 .rating { font-size: 14px; }
 .card-actions { gap: 12px; }
 .btn-half { padding-top: 14px; padding-bottom: 14px; font-size: 14px; }
-@media (max-width: 1120px) { .products-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 820px) { .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 600px) { .products-grid { grid-template-columns: 1fr; gap: 22px; }.product-img { height: 360px; }.product-card h3 { font-size: 21px; } }
+@media (max-width: 1120px) {
+   .products-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 820px) { 
+  .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { 
+  .products-grid { grid-template-columns: 1fr; gap: 22px; }
+  .product-img { height: 360px; }
+  .product-card h3 { font-size: 21px; } }

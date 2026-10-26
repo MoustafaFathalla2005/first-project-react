@@ -10,7 +10,7 @@ function MainCom() {
         <Outlet />
       </div>
       <footer className="app-footer">
-        <p>© {new Date().getFullYear()} Sprintix Sports Store — Train hard. Shop smart.</p>
+        <p>&copy; {new Date().getFullYear()} Sprintix Sports Store — Train hard. Shop smart.</p>
       </footer>
     </div>
   );

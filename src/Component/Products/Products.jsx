@@ -32,6 +32,43 @@ function Products() {
     .filter((product) => product.title.toLowerCase().includes(query.toLowerCase()))
     .sort((a, b) => sort === "price-low" ? a.price - b.price : sort === "price-high" ? b.price - a.price : b.rating.rate - a.rating.rate);
 
+  const productCards = [];
+  for (let i = 0; i < visibleProducts.length; i++) {
+    const product = visibleProducts[i];
+    productCards.push(
+      <div
+        className="product-card fade-in-up"
+        key={product.id}
+        style={{ animationDelay: `${Math.min(i, 8) * 0.05}s` }}
+      >
+        <Link to={`/details/${product.id}`} className="product-img">
+          <img src={product.image} alt={product.title} />
+          <span className="product-badge">{product.badge}</span>
+        </Link>
+        <span className="product-category">{product.category}</span>
+        <h3>{product.title}</h3>
+        <div className="product-meta">
+          <p className="price">${product.price}</p>
+          <p className="rating">
+            ⭐ {product.rating?.rate}{" "}
+            <span className="rating-count">({product.rating?.count})</span>
+          </p>
+        </div>
+        <div className="card-actions">
+          <Link to={`/details/${product.id}`} className="btn btn-outline btn-half">
+            View
+          </Link>
+          <button
+            className={`btn btn-half ${justAdded === product.id ? "btn-added" : ""}`}
+            onClick={() => handleAdd(product)}
+          >
+            {justAdded === product.id ? "Added ✓" : "Add to bag +"}
+          </button>
+        </div>
+      </div>,
+    );
+  }
+
   if (loading) {
     return (
       <div className="status-wrap">
@@ -60,38 +97,7 @@ function Products() {
         <div className="catalog-controls"><label className="search-box">⌕<input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search gear" /></label><select value={sort} onChange={(event) => setSort(event.target.value)}><option value="featured">Sort: Featured</option><option value="price-low">Price: Low to high</option><option value="price-high">Price: High to low</option></select></div>
       </div>
       <div className="products-grid">
-        {visibleProducts.map((product, i) => (
-          <div
-            className="product-card fade-in-up"
-            key={product.id}
-            style={{ animationDelay: `${Math.min(i, 8) * 0.05}s` }}
-          >
-            <Link to={`/details/${product.id}`} className="product-img">
-              <img src={product.image} alt={product.title} />
-              <span className="product-badge">{product.badge}</span>
-            </Link>
-            <span className="product-category">{product.category}</span>
-            <h3>{product.title}</h3>
-            <div className="product-meta">
-              <p className="price">${product.price}</p>
-              <p className="rating">
-                ⭐ {product.rating?.rate}{" "}
-                <span className="rating-count">({product.rating?.count})</span>
-              </p>
-            </div>
-            <div className="card-actions">
-              <Link to={`/details/${product.id}`} className="btn btn-outline btn-half">
-                View
-              </Link>
-                <button
-                className={`btn btn-half ${justAdded === product.id ? "btn-added" : ""}`}
-                onClick={() => handleAdd(product)}
-              >
-                  {justAdded === product.id ? "Added ✓" : "Add to bag +"}
-              </button>
-            </div>
-          </div>
-        ))}
+        {productCards}
       </div>
       {visibleProducts.length === 0 && <div className="empty-search"><strong>No gear found.</strong><span>Try another search or category.</span></div>}
     </main>

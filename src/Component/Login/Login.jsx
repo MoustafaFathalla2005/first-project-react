@@ -38,7 +38,6 @@ function Login() {
     if (!validate()) return;
 
     setSubmitting(true);
-    // no artificial delay — log in and navigate immediately once validated
     login(username.trim());
     navigate("/");
   };

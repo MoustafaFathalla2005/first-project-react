@@ -11,7 +11,7 @@ const instance = axios.create({
 // request interceptor
 instance.interceptors.request.use(
   (req) => {
-    // add configurations here (e.g. headers)
+    // add configurations here ( headers)
     return req;
   },
   (err) => {
