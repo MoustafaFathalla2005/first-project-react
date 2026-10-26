@@ -137,7 +137,7 @@ src/
 
 ## ☁️ Deploy to Vercel
 
-1. Push the project to GitHub and import the repository in [Vercel](https://vercel.com).
+1. Push the project to GitHub and import the repository in [Vercel]([https://vercel.com](https://first-project-react-nu.vercel.app/)).
 2. Use the Vite framework preset.
 3. Set the build command to `npm run build` and the output directory to `dist`.
 4. Deploy the project.
