@@ -14,6 +14,8 @@ A responsive sports storefront for discovering gear, exploring product details, 
 
 <br />
 
+[🚀 **Live Demo**](https://first-project-react-nu.vercel.app/)
+
 [Explore the features](#-features) · [Get started](#-getting-started) · [Project structure](#-project-structure)
 
 </div>
