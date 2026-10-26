@@ -5,6 +5,22 @@ import { useCart } from "../../context/CartContext.jsx";
 import products from "../../data/products.js";
 import "./ProductDetails.css";
 
+function isProductDetails(value) {
+  return (
+    value !== null &&
+    typeof value === "object" &&
+    typeof value.title === "string" &&
+    value.title.trim().length > 0 &&
+    typeof value.category === "string" &&
+    value.category.trim().length > 0 &&
+    Number.isFinite(value.price) &&
+    value.price >= 0 &&
+    typeof value.image === "string" &&
+    value.image.length > 0 &&
+    typeof value.description === "string"
+  );
+}
+
 function ProductDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -16,30 +32,43 @@ function ProductDetails() {
   const [added, setAdded] = useState(false);
 
   useEffect(() => {
-    let isMounted = true;
+    const controller = new AbortController();
     setLoading(true);
     setError(false);
     setAdded(false);
     setQty(1);
+    setProduct(null);
 
-    const localProduct = products.find((item) => item.id === Number(id));
+    const productId = Number(id);
+    if (!Number.isSafeInteger(productId) || productId < 1) {
+      setError(true);
+      setLoading(false);
+      return () => controller.abort();
+    }
+
+    const localProduct = products.find((item) => item.id === productId);
     if (localProduct) {
       setProduct(localProduct);
       setLoading(false);
     } else {
-      instance.get(`/products/${id}`).then((res) => {
-        if (isMounted) {
+      instance.get(`/products/${productId}`, { signal: controller.signal }).then((res) => {
+        if (isProductDetails(res.data)) {
           setProduct(res.data);
           setLoading(false);
+        } else {
+          setError(true);
+          setLoading(false);
         }
-      }).catch(() => {
-        if (isMounted) { setError(true); setLoading(false); }
+      }).catch((requestError) => {
+        if (!controller.signal.aborted) {
+          console.error("Unable to load product details.", requestError);
+          setError(true);
+          setLoading(false);
+        }
       });
     }
 
-    return () => {
-      isMounted = false;
-    };
+    return () => controller.abort();
   }, [id]);
 
   const handleAddToCart = () => {
@@ -49,18 +78,19 @@ function ProductDetails() {
 
   if (loading) {
     return (
-      <div className="status-wrap">
+      <main className="status-wrap page" role="status" aria-live="polite">
         <div className="spinner" />
         <p>Loading...</p>
-      </div>
+      </main>
     );
   }
 
   if (error || !product) {
     return (
-      <div className="status-wrap error">
-        <p>Something went wrong!</p>
-      </div>
+      <main className="status-wrap error page" role="alert">
+        <p>Product not found or unavailable.</p>
+        <Link to="/products" className="btn">Browse products</Link>
+      </main>
     );
   }
 
@@ -83,11 +113,11 @@ function ProductDetails() {
           <div className="qty-row">
             <span className="qty-label">Quantity</span>
             <div className="qty-stepper">
-              <button onClick={() => setQty((q) => Math.max(1, q - 1))} aria-label="Decrease">
+              <button type="button" onClick={() => setQty((q) => Math.max(1, q - 1))} aria-label={`Decrease quantity of ${product.title}`}>
                 −
               </button>
               <span>{qty}</span>
-              <button onClick={() => setQty((q) => q + 1)} aria-label="Increase">
+              <button type="button" onClick={() => setQty((q) => q + 1)} aria-label={`Increase quantity of ${product.title}`}>
                 +
               </button>
             </div>

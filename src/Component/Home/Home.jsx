@@ -19,9 +19,14 @@ function Home() {
             <Link to="/products" className="btn">Shop the drop <span>↗</span></Link>
             <Link to="/products?category=Running" className="hero-text-link">Explore running <span>→</span></Link>
           </div>
+          <div className="hero-data" aria-label="Sprintix design details">
+            <span><strong>01</strong> / PERFORMANCE SYSTEM</span>
+            <span>BUILT FOR WHAT'S NEXT</span>
+          </div>
         </div>
         <div className="hero-image-wrap">
           <img src={heroImage} alt="Athlete training outdoors" />
+          <div className="hero-readout"><span>FIELD TEST</span><strong>001—SPRINTIX</strong></div>
           <div className="hero-stamp"><strong>01</strong><span>BUILT<br />TO MOVE</span></div>
           <div className="hero-note"><span>SPRINTIX FIELD NOTE</span><strong>Gear for the<br />long game.</strong></div>
         </div>
@@ -33,7 +38,7 @@ function Home() {
         <div className="featured-grid">
           {products.slice(0, 3).map((product, index) => (
             <Link to={`/details/${product.id}`} className={`feature-tile feature-${index + 1}`} key={product.id}>
-              <img src={product.image} alt={product.title} />
+              <img src={product.image} alt={product.title} loading="lazy" />
               <div className="feature-overlay"><span>{product.category}</span><h3>{product.title}</h3><strong>${product.price.toFixed(2)} <b>↗</b></strong></div>
             </Link>
           ))}
@@ -46,7 +51,7 @@ function Home() {
         <div className="category-heading"><span className="eyebrow">FIND YOUR PACE</span><h2>Shop by <em>discipline.</em></h2></div>
         <div className="category-grid">
           {[['01', 'RUNNING', runningImage], ['02', 'TRAINING', trainingImage], ['03', 'RECOVERY', recoveryImage]].map(([number, label, image]) => (
-            <Link to={`/products?category=${label[0] + label.slice(1).toLowerCase()}`} className="category-tile" key={label}><img src={image} alt={label} /><span>{number}</span><h3>{label} <b>↗</b></h3></Link>
+            <Link to={`/products?category=${label[0] + label.slice(1).toLowerCase()}`} className="category-tile" key={label}><img src={image} alt="" loading="lazy" /><span>{number}</span><h3>{label} <b>↗</b></h3></Link>
           ))}
         </div>
       </section>

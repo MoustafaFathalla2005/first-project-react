@@ -16,22 +16,24 @@
   grid-template-columns: 72px 1fr auto auto auto;
   align-items: center;
   gap: 18px;
-  background-color: var(--white);
-  border-radius: var(--radius);
+  background: linear-gradient(145deg, #fff, #f7faf9);
+  border: 1px solid rgba(16, 34, 54, 0.1);
+  border-radius: 16px;
   padding: 16px 20px;
   box-shadow: var(--shadow);
   transition: box-shadow 0.2s ease;
 }
 
 .cart-item:hover {
+  border-color: rgba(22, 140, 131, 0.26);
   box-shadow: var(--shadow-hover);
 }
 
 .cart-item .qty-stepper {
   display: flex;
   align-items: center;
-  border: 1.5px solid #e2e6eb;
-  border-radius: 999px;
+  border: 1px solid rgba(16, 34, 54, 0.16);
+  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -39,7 +41,7 @@
   width: 32px;
   height: 32px;
   border: none;
-  background-color: #f7f8fa;
+  background-color: #edf4f3;
   font-size: 16px;
   font-weight: 700;
   color: var(--navy);
@@ -48,8 +50,8 @@
 }
 
 .cart-item .qty-stepper button:hover {
-  background-color: rgba(255, 87, 34, 0.14);
-  color: var(--accent-dark);
+  background-color: rgba(116, 245, 223, 0.25);
+  color: #116d68;
 }
 
 .cart-item .qty-stepper span {
@@ -62,8 +64,11 @@
 .cart-item-img {
   width: 72px;
   height: 72px;
-  background-color: #f7f8fa;
-  border-radius: 10px;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.92), transparent 60%),
+    #e4efee;
+  border: 1px solid rgba(16, 34, 54, 0.08);
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -114,8 +119,9 @@
 }
 
 .cart-summary {
-  background-color: var(--white);
-  border-radius: var(--radius);
+  background: linear-gradient(145deg, #fff, #f7faf9);
+  border: 1px solid rgba(16, 34, 54, 0.1);
+  border-radius: 16px;
   padding: 26px;
   box-shadow: var(--shadow);
   position: sticky;
@@ -139,23 +145,44 @@
   color: var(--navy);
   font-weight: 800;
   font-size: 17px;
-  border-top: 1px solid #eef0f3;
+  border-top: 1px solid rgba(16, 34, 54, 0.12);
   padding-top: 14px;
   margin-top: 6px;
   margin-bottom: 20px;
+}
+
+.checkout-note {
+  margin: 12px 0 0;
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
 }
 
 .status-wrap.success .success-badge {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background-color: var(--success);
+  background-color: #168c83;
   color: #fff;
   font-size: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 6px;
+}
+
+.cart-summary h2 {
+  letter-spacing: -0.035em;
+}
+
+.cart-item .qty-stepper button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.remove-btn {
+  background: rgba(185, 56, 50, 0.1);
 }
 
 .status-wrap.success h2 {

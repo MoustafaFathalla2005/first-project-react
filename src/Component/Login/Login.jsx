@@ -9,7 +9,6 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
-  const [submitting, setSubmitting] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -24,7 +23,10 @@ function Login() {
     else if (username.trim().length < 3) next.username = "At least 3 characters";
 
     if (mode === "signup" && !email.trim()) next.email = "Email is required";
-    else if (mode === "signup" && !email.includes("@")) next.email = "Enter a valid email";
+    else if (
+      mode === "signup" &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
+    ) next.email = "Enter a valid email";
 
     if (!password) next.password = "Password is required";
     else if (password.length < 6) next.password = "At least 6 characters";
@@ -37,7 +39,6 @@ function Login() {
     e.preventDefault();
     if (!validate()) return;
 
-    setSubmitting(true);
     login(username.trim());
     navigate("/");
   };
@@ -47,9 +48,9 @@ function Login() {
       <div className="login-showcase"><span className="eyebrow">MEMBERS MOVE FURTHER</span><h1>Your next<br /><em>starts here.</em></h1><p>Join a community built around better movement, sharper focus and gear that keeps up.</p><div className="login-quote">“The best investment is the one that gets you moving.”</div></div>
       <div className={`login-card fade-in-up ${mode === "signup" ? "is-signup" : "is-signin"}`}>
         <div className="login-badge">S</div>
-        <div className="login-switcher" role="tablist" aria-label="Account access">
-          <button type="button" className={mode === "signin" ? "active" : ""} onClick={() => changeMode("signin")}>Sign in</button>
-          <button type="button" className={mode === "signup" ? "active" : ""} onClick={() => changeMode("signup")}>Sign up</button>
+        <div className="login-switcher" role="group" aria-label="Account access">
+          <button type="button" aria-pressed={mode === "signin"} className={mode === "signin" ? "active" : ""} onClick={() => changeMode("signin")}>Sign in</button>
+          <button type="button" aria-pressed={mode === "signup"} className={mode === "signup" ? "active" : ""} onClick={() => changeMode("signup")}>Sign up</button>
         </div>
         <h1>{mode === "signin" ? "Welcome back." : "Start moving."}</h1>
         <p className="login-sub">{mode === "signin" ? "Sign in to your Sprintix account." : "Create your free Sprintix account."}</p>
@@ -59,19 +60,21 @@ function Login() {
             Username
             <input
               type="text"
+              autoComplete="username"
+              aria-invalid={Boolean(errors.username)}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className={errors.username ? "invalid" : ""}
               placeholder="Enter your username"
             />
-            {errors.username && <span className="field-error">{errors.username}</span>}
+            {errors.username && <span className="field-error" role="alert">{errors.username}</span>}
           </label>
 
           {mode === "signup" && (
             <label className="signup-field">
               Email
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className={errors.email ? "invalid" : ""} placeholder="you@example.com" />
-              {errors.email && <span className="field-error">{errors.email}</span>}
+              <input type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} className={errors.email ? "invalid" : ""} aria-invalid={Boolean(errors.email)} placeholder="you@example.com" />
+              {errors.email && <span className="field-error" role="alert">{errors.email}</span>}
             </label>
           )}
 
@@ -79,16 +82,18 @@ function Login() {
             Password
             <input
               type="password"
+              autoComplete={mode === "signin" ? "current-password" : "new-password"}
+              aria-invalid={Boolean(errors.password)}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className={errors.password ? "invalid" : ""}
               placeholder="Enter your password"
             />
-            {errors.password && <span className="field-error">{errors.password}</span>}
+            {errors.password && <span className="field-error" role="alert">{errors.password}</span>}
           </label>
 
-          <button type="submit" className="btn btn-block" disabled={submitting}>
-            {submitting ? <span className="spinner sm" /> : mode === "signin" ? "Enter the club ↗" : "Create account ↗"}
+          <button type="submit" className="btn btn-block">
+            {mode === "signin" ? "Enter the club ↗" : "Create account ↗"}
           </button>
           <p className="form-footnote">{mode === "signin" ? "New to Sprintix? " : "Already have an account? "}<button type="button" onClick={() => changeMode(mode === "signin" ? "signup" : "signin")}>{mode === "signin" ? "Create an account" : "Sign in"}</button></p>
         </form>

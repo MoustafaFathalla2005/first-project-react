@@ -12,7 +12,9 @@
 .app-footer {
   text-align: center;
   padding: 22px 16px;
-  background-color: var(--navy);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(116, 245, 223, 0.08), transparent 65%),
+    var(--navy);
   color: #b8c2cc;
   font-size: 13px;
 }

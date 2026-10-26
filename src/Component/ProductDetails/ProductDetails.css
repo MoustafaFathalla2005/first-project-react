@@ -1,8 +1,9 @@
 .details-card {
   display: flex;
   gap: 40px;
-  background-color: var(--white);
-  border-radius: var(--radius);
+  background: linear-gradient(145deg, #fff, #f7faf9);
+  border: 1px solid rgba(16, 34, 54, 0.1);
+  border-radius: 18px;
   padding: 36px;
   box-shadow: var(--shadow);
   flex-wrap: wrap;
@@ -14,8 +15,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f7f8fa;
-  border-radius: 12px;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.94), transparent 60%),
+    linear-gradient(145deg, #e4efee, #e9eef2);
+  border: 1px solid rgba(16, 34, 54, 0.08);
+  border-radius: 14px;
 }
 
 .details-img img {
@@ -32,14 +36,14 @@
 
 .details-info .product-category {
   display: inline-block;
-  background-color: rgba(255, 87, 34, 0.12);
-  color: var(--accent-dark);
+  background-color: rgba(116, 245, 223, 0.22);
+  color: #116d68;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   padding: 4px 10px;
-  border-radius: 999px;
+  border-radius: 5px;
   margin-bottom: 12px;
 }
 
@@ -66,7 +70,7 @@
 }
 
 .details-info .description {
-  color: #555;
+  color: var(--text-muted);
   line-height: 1.7;
   margin-bottom: 26px;
 }
@@ -88,8 +92,8 @@
   display: flex;
   align-items: center;
   gap: 0;
-  border: 1.5px solid #e2e6eb;
-  border-radius: 999px;
+  border: 1px solid rgba(16, 34, 54, 0.16);
+  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -97,7 +101,7 @@
   width: 36px;
   height: 36px;
   border: none;
-  background-color: #f7f8fa;
+  background-color: #edf4f3;
   font-size: 18px;
   font-weight: 700;
   color: var(--navy);
@@ -106,8 +110,8 @@
 }
 
 .qty-stepper button:hover {
-  background-color: rgba(255, 87, 34, 0.14);
-  color: var(--accent-dark);
+  background-color: rgba(116, 245, 223, 0.25);
+  color: #116d68;
 }
 
 .qty-stepper span {
@@ -132,5 +136,21 @@
 }
 
 .back-link:hover {
-  color: var(--accent);
+  color: var(--navy-light);
+}
+
+@media (max-width: 640px) {
+  .details-card {
+    gap: 24px;
+    padding: 22px;
+  }
+
+  .details-img {
+    flex-basis: 100%;
+    height: 260px;
+  }
+
+  .details-info {
+    min-width: 0;
+  }
 }

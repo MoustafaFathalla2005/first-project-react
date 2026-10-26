@@ -5,9 +5,12 @@ import "./MainCom.css";
 function MainCom() {
   return (
     <div className="app-shell">
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <Header />
       <div className="app-content">
-        <Outlet />
+        <div id="main-content" tabIndex="-1">
+          <Outlet />
+        </div>
       </div>
       <footer className="app-footer">
         <p>&copy; {new Date().getFullYear()} Sprintix Sports Store — Train hard. Shop smart.</p>

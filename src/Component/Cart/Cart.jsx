@@ -14,25 +14,25 @@ function Cart() {
 
   if (placed) {
     return (
-      <div className="status-wrap success fade-in-up">
+      <main className="status-wrap success page fade-in-up" role="status">
         <div className="success-badge">✓</div>
-        <h2>Order Placed Successfully!</h2>
-        <p>Thanks for shopping with Sprintix Sports Store.</p>
+        <h2>Demo checkout complete!</h2>
+        <p>This checkout is a simulation; no payment was collected.</p>
         <Link to="/products" className="btn">
           Continue Shopping
         </Link>
-      </div>
+      </main>
     );
   }
 
   if (items.length === 0) {
     return (
-      <div className="status-wrap">
+      <main className="status-wrap page">
         <p>Your cart is empty.</p>
         <Link to="/products" className="btn">
           Browse Products
         </Link>
-      </div>
+      </main>
     );
   }
 
@@ -59,11 +59,11 @@ function Cart() {
                 <p className="cart-item-price">${item.price.toFixed(2)}</p>
               </div>
               <div className="qty-stepper">
-                <button onClick={() => updateQty(item.id, item.qty - 1)} aria-label="Decrease">
+                <button type="button" onClick={() => updateQty(item.id, item.qty - 1)} aria-label={`Decrease quantity of ${item.title}`}>
                   −
                 </button>
                 <span>{item.qty}</span>
-                <button onClick={() => updateQty(item.id, item.qty + 1)} aria-label="Increase">
+                <button type="button" onClick={() => updateQty(item.id, item.qty + 1)} aria-label={`Increase quantity of ${item.title}`}>
                   +
                 </button>
               </div>
@@ -71,7 +71,8 @@ function Cart() {
               <button
                 className="remove-btn"
                 onClick={() => removeFromCart(item.id)}
-                aria-label="Remove item"
+                aria-label={`Remove ${item.title} from bag`}
+                type="button"
               >
                 ✕
               </button>
@@ -93,9 +94,10 @@ function Cart() {
             <span>Total</span>
             <span>${totalPrice.toFixed(2)}</span>
           </div>
-          <button className="btn btn-block" onClick={handleCheckout}>
-            Checkout
+          <button className="btn btn-block" onClick={handleCheckout} type="button">
+            Complete demo checkout
           </button>
+          <p className="checkout-note">Demo only — no payment will be collected.</p>
         </aside>
       </div>
     </main>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext.jsx";
 import { useCart } from "../../context/CartContext.jsx";
@@ -9,6 +9,17 @@ function Header() {
   const { user, logout } = useAuth();
   const { totalItems } = useCart();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!open) return undefined;
+
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [open]);
 
   const linkClass = ({ isActive }) => (isActive ? "nav-link active" : "nav-link");
 
@@ -29,14 +40,17 @@ function Header() {
         <button
           className={`burger ${open ? "open" : ""}`}
           onClick={() => setOpen((o) => !o)}
-          aria-label="Toggle menu"
+          aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={open}
+          aria-controls="primary-navigation"
+          type="button"
         >
           <span />
           <span />
           <span />
         </button>
 
-        <nav className={`nav-links ${open ? "show" : ""}`}>
+        <nav id="primary-navigation" className={`nav-links ${open ? "show" : ""}`} aria-label="Main navigation">
           <NavLink to="/" end className={linkClass} onClick={() => setOpen(false)}>
             Home
           </NavLink>
@@ -51,7 +65,7 @@ function Header() {
           {user ? (
             <div className="user-block">
               <span className="user-greeting">Hi, {user.username}</span>
-              <button className="logout-btn" onClick={handleLogout}>
+              <button className="logout-btn" onClick={handleLogout} type="button">
                 Logout
               </button>
             </div>

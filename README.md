@@ -1,87 +1,105 @@
 <div align="center">
 
-# Sprintix
-### Sports gear. Built for the next move.
+# SPRINTIX
+### Performance gear. Built for the next move.
 
-A responsive sports storefront for discovering gear, exploring product details, and managing your shopping bag.
-
-<br />
-
-![React](https://img.shields.io/badge/React-18-149ECA?style=for-the-badge&logo=react&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite&logoColor=white)
-![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-state_management-764ABC?style=for-the-badge&logo=redux&logoColor=white)
-![React Router](https://img.shields.io/badge/React_Router-7-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white)
+A polished, responsive sports storefront built as a React portfolio project.
+Browse the collection, find gear by category, and try the shopping-bag flow.
 
 <br />
 
-[🚀 **Live Demo**](https://first-project-react-nu.vercel.app/)
+[![Live demo](https://img.shields.io/badge/LIVE_DEMO-Visit_Sprintix-0d1b2a?style=for-the-badge&logo=vercel&logoColor=white)](https://first-project-react-nu.vercel.app/)
+[![React](https://img.shields.io/badge/React-18-149ECA?style=for-the-badge&logo=react&logoColor=white)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev/)
+[![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-State-764ABC?style=for-the-badge&logo=redux&logoColor=white)](https://redux-toolkit.js.org/)
 
-[Explore the features](#-features) · [Get started](#-getting-started) · [Project structure](#-project-structure)
+<br />
+
+[Features](#-what-you-can-do) · [Architecture](#-under-the-hood) · [Run locally](#-run-it-locally) · [Connect](#-connect)
 
 </div>
 
 ---
 
-## ✨ Features
+## The experience
 
-- **Discover the collection** with a responsive storefront and product catalog.
-- **Find the right gear** with category filters, text search, and price or rating sorting.
-- **Explore product details** with quantity controls and add-to-bag actions.
-- **Manage your shopping bag** with quantity updates, item removal, and saved cart state.
-- **Sign in or create an account** with client-side form validation.
-- **Navigate seamlessly** with React Router and direct-route support on Vercel.
+Sprintix is a single-page storefront concept for discovering sports and training essentials. The interface brings together a campaign-style home page, a searchable catalog, individual product pages, a persistent shopping bag, and a client-side sign-in demo.
 
-## 🧭 How the app is organized
+### ✨ What you can do
+
+- **Explore the storefront** — browse featured products and shop by discipline.
+- **Find products quickly** — search names and categories, filter by category, and sort by price or rating.
+- **Open a product page** — check its description, rating, and price; choose a quantity and add it to your bag.
+- **Manage the bag** — update quantities, remove products, and review the order total.
+- **Try the account flow** — switch between sign-in and sign-up with client-side validation.
+- **Use it on mobile** — responsive layouts, a keyboard-operable navigation menu, visible focus states, and reduced-motion support.
+
+## 🧭 Under the hood
 
 ```mermaid
 flowchart LR
-    UI[React pages and components]
-    Router[React Router]
-    Redux[Redux Toolkit<br/>product catalog]
-    Local[Local catalog<br/>src/data/products.js]
-    Context[React Context<br/>cart and auth]
-    Storage[(localStorage)]
-    API[Fake Store API<br/>details fallback]
+    Pages[React pages and components]
+    Routes[React Router]
+    ProductState[Redux Toolkit]
+    Catalog[src/data/products.js]
+    Contexts[React Context]
+    BrowserStorage[(localStorage)]
+    RemoteAPI[Fake Store API]
 
-    UI --> Router
-    UI --> Redux
-    Redux --> Local
-    UI --> Context
-    Context <--> Storage
-    UI -. unknown product ID .-> API
+    Pages --> Routes
+    Pages --> ProductState
+    ProductState --> Catalog
+    Pages --> Contexts
+    Contexts <--> BrowserStorage
+    Pages -. product ID not in local catalog .-> RemoteAPI
 ```
 
-The catalog is local-first: the product list is loaded from `src/data/products.js` through a Redux Toolkit async thunk. The Fake Store API is used by the product details page only when the requested ID is not in the local catalog.
+### Data and state
 
-| State area | Implementation | Responsibility |
+| Concern | Source of truth | What it handles |
 | --- | --- | --- |
-| Product catalog | Redux Toolkit | Loads the local catalog and tracks loading/error state |
-| Shopping bag | React Context | Cart actions, quantities, totals, and `localStorage` persistence |
-| Authentication | React Context | Demo user state persisted in `localStorage` |
+| Product catalog | Local `src/data/products.js`, loaded by Redux Toolkit | 12 products and catalog loading/error state |
+| Product details | Local catalog first | Requests Fake Store API only when an ID is not in the local catalog |
+| Shopping bag | `CartContext` | Items, quantity changes, totals, and browser persistence |
+| Demo account | `AuthContext` | A demo username persisted in the browser |
+| Page navigation | React Router | Nested layout, catalog, product, cart, login, and not-found routes |
 
-> **Demo authentication:** Sign-in and sign-up are client-side demonstrations. There is no backend authentication, and the app does not verify credentials with a server.
+> **Please note:** This is a front-end demo. Sign-in does not authenticate against a server, and checkout does not collect payment or create a real order. Cart and demo-user data are stored in the current browser using `localStorage`.
 
-## 🛠️ Tech stack
+### Routes
 
-| Area | Tools |
+| URL | Page |
+| --- | --- |
+| `/` | Home |
+| `/products` | Product catalog |
+| `/products?category=Running` | Catalog filtered by category |
+| `/details/:id` | Product details |
+| `/cart` | Shopping bag and demo checkout |
+| `/login` | Sign-in / sign-up demo |
+| Any unmatched path | Not found |
+
+### Technology
+
+| Layer | Stack |
 | --- | --- |
 | UI | React 18, JSX |
-| Build and development | Vite 8 |
-| Routing | React Router DOM 7 |
-| State | Redux Toolkit, React Redux, React Context |
+| Tooling | Vite 8 |
+| Navigation | React Router DOM 7 |
+| Product state | Redux Toolkit, React Redux |
+| Cart and demo auth | React Context |
 | HTTP | Axios |
 | Styling | CSS |
-| Hosting configuration | Vercel |
+| Hosting | Vercel |
 
-## 🚀 Getting started
+## 🚀 Run it locally
 
-### Requirements
+### Prerequisites
 
-- Node.js compatible with Vite 8
+- Node.js **20.19+** or **22.12+** (Vite 8 requirement)
 - npm
 - Git
 
-### Install and run
+### Setup
 
 ```bash
 git clone https://github.com/MoustafaFathalla2005/first-project-react.git
@@ -90,73 +108,76 @@ npm install
 npm run dev
 ```
 
-Vite prints the local development URL in the terminal (usually `http://localhost:5173`).
+Open the local URL printed by Vite (typically `http://localhost:5173`).
 
-## 📜 Available scripts
+### Project scripts
 
-| Command | Description |
+| Command | Purpose |
 | --- | --- |
-| `npm run dev` | Start the Vite development server with hot reload |
-| `npm run build` | Create an optimized production build in `dist/` |
-| `npm run preview` | Preview the production build locally |
+| `npm run dev` | Start the development server with hot reload |
+| `npm run build` | Generate the optimized production app in `dist/` |
+| `npm run preview` | Serve the production build locally |
 
-To check a production build locally:
+Check the production build before deployment:
 
 ```bash
 npm run build
 npm run preview
 ```
 
-## 🗂️ Project structure
+## 📂 Project map
 
 ```text
 src/
 ├── api/
-│   └── axiosInstance.js          # Shared Axios client for the details fallback
-├── assets/
-│   └── images/                   # Local product and hero photography
+│   └── axiosInstance.js             # Axios client for remote product fallback
+├── assets/images/                   # Local product and storefront images
 ├── Component/
-│   ├── Cart/                     # Shopping bag page
-│   ├── Header/                   # Main navigation
-│   ├── Home/                     # Storefront landing page
-│   ├── Login/                    # Sign-in/sign-up demo form
-│   ├── MainCom/                  # Shared layout, outlet, and footer
-│   ├── NotFound/                 # 404 page
-│   ├── ProductDetails/           # Product detail and API fallback
-│   └── Products/                 # Catalog, filters, search, and sorting
+│   ├── Cart/                         # Bag, totals, and demo checkout
+│   ├── Header/                       # Responsive navigation and account actions
+│   ├── Home/                         # Landing page and category entry points
+│   ├── Login/                        # Validated client-side account demo
+│   ├── MainCom/                      # Shared layout, skip link, and footer
+│   ├── NotFound/                     # Fallback route
+│   ├── ProductDetails/               # Product page and API fallback
+│   └── Products/                     # Catalog, search, filters, and sorting
 ├── context/
-│   ├── AuthContext.jsx            # Demo authentication state
-│   └── CartContext.jsx            # Cart state, actions, and persistence
+│   ├── AuthContext.jsx               # Demo user state and persistence
+│   └── CartContext.jsx               # Shopping-bag state and persistence
 ├── data/
-│   └── products.js               # Primary local catalog (12 products)
+│   └── products.js                   # Primary local catalog
 ├── store/
-│   ├── productsSlice.js           # Redux Toolkit product state and thunk
-│   └── store.js                   # Redux store configuration
-├── index.css                      # Global styles and design tokens
-├── main.jsx                       # Providers and application entry point
-└── router.jsx                     # Application routes
+│   ├── productsSlice.js              # Redux Toolkit product state
+│   └── store.js                      # Redux store setup
+├── index.css                         # Design tokens, shared styles, and motion rules
+├── main.jsx                          # App entry point and providers
+└── router.jsx                        # Route configuration
 ```
 
-## ☁️ Deploy to Vercel
+## ☁️ Deploy
 
-1. Push the project to GitHub and import the repository in [Vercel]([https://vercel.com](https://first-project-react-nu.vercel.app/)).
-2. Use the Vite framework preset.
-3. Set the build command to `npm run build` and the output directory to `dist`.
-4. Deploy the project.
+The project is configured for Vercel:
 
-The included `vercel.json` rewrites routes to `index.html`, allowing React Router to handle direct links and page refreshes.
+1. Push the repository to GitHub and import it into [Vercel](https://vercel.com).
+2. Select the Vite framework preset.
+3. Use `npm run build` as the build command and `dist` as the output directory.
+4. Deploy.
 
-## 🔭 Ideas for future improvements
+`vercel.json` rewrites app routes to `index.html`, so React Router can render direct links and refreshed pages.
 
-- Replace demo authentication with a secure backend.
-- Add automated tests for shopping, filtering, and authentication flows.
-- Consider CSS Modules if the component stylesheet grows.
-- Optimize images further with modern formats and lazy loading.
+## 👋 Connect
+
+Built by **Moustafa Fathalla**.
+
+- [GitHub](https://github.com/MoustafaFathalla2005)
+- [LinkedIn](https://www.linkedin.com/in/moustafafathalla/)
+- [Source repository](https://github.com/MoustafaFathalla2005/first-project-react)
+- [Live Sprintix demo](https://first-project-react-nu.vercel.app/)
 
 ---
 
 <div align="center">
 
-Made for learning, building, and moving forward.
+Made to learn, build, and move forward.
 
 </div>
